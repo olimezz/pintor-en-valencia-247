@@ -1,58 +1,39 @@
-<!--
-  LOGOTIPO MONOGRAMA "PV" (ESTILO ARCOÍRIS) — PINTOR EN VALENCIA 24/7
-  Referencia original: https://pintorenvalencia247.es
-  NOTA PARA SUSTITUCIÓN DIRECTA:
-  Si dispones del archivo rasterizado o vectorial descargado directamente del servidor
-  de https://pintorenvalencia247.es (ej. /wp-content/uploads/.../logo-pv.png),
-  puedes reemplazar este archivo o actualizar la ruta en index.html (<img class="logo-original-img">).
--->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-labelledby="pvLogoTitle pvLogoDesc">
-  <title id="pvLogoTitle">Pintor en Valencia 24/7 — Logotipo Monograma PV</title>
-  <desc id="pvLogoDesc">Monograma con las letras P y V en degradado arcoíris para Pintor en Valencia 24/7</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Logotipo PV Pintor en Valencia 24/7">
   <defs>
-    <!-- Degradado arcoíris principal para la letra P y el anillo -->
-    <linearGradient id="pvRainbowMain" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F43F5E" />
-      <stop offset="20%" stop-color="#F97316" />
-      <stop offset="40%" stop-color="#EAB308" />
-      <stop offset="62%" stop-color="#10B981" />
-      <stop offset="82%" stop-color="#2563EB" />
+    <!-- Degradado fiel al monograma original P (rojo -> naranja -> ámbar cálido) -->
+    <linearGradient id="pvOrigP" x1="10%" y1="15%" x2="95%" y2="80%">
+      <stop offset="0%" stop-color="#FF1E00" />
+      <stop offset="52%" stop-color="#FF5E00" />
+      <stop offset="100%" stop-color="#FFA800" />
+    </linearGradient>
+    <!-- Degradado fiel al monograma original V (azul intenso -> verde esmeralda -> amarillo vivo) -->
+    <linearGradient id="pvOrigV" x1="12%" y1="75%" x2="92%" y2="12%">
+      <stop offset="0%" stop-color="#0038FF" />
+      <stop offset="48%" stop-color="#059669" />
+      <stop offset="76%" stop-color="#84CC16" />
+      <stop offset="100%" stop-color="#FACC15" />
+    </linearGradient>
+    <linearGradient id="pvRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF1E00" />
+      <stop offset="22%" stop-color="#FF7A00" />
+      <stop offset="44%" stop-color="#FACC15" />
+      <stop offset="66%" stop-color="#10B981" />
+      <stop offset="85%" stop-color="#2563EB" />
       <stop offset="100%" stop-color="#7C3AED" />
     </linearGradient>
-    <!-- Degradado arcoíris cálido-frío para la letra P -->
-    <linearGradient id="pvGradP" x1="15%" y1="10%" x2="85%" y2="90%">
-      <stop offset="0%" stop-color="#EF4444" />
-      <stop offset="38%" stop-color="#F97316" />
-      <stop offset="75%" stop-color="#FACC15" />
-      <stop offset="100%" stop-color="#10B981" />
-    </linearGradient>
-    <!-- Degradado arcoíris frío-violeta para la letra V -->
-    <linearGradient id="pvGradV" x1="10%" y1="15%" x2="90%" y2="95%">
-      <stop offset="0%" stop-color="#FACC15" />
-      <stop offset="32%" stop-color="#10B981" />
-      <stop offset="68%" stop-color="#2563EB" />
-      <stop offset="100%" stop-color="#7C3AED" />
-    </linearGradient>
-    <filter id="pvSoftShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.10" />
-    </filter>
   </defs>
 
-  <!-- Fondo limpio con borde arcoíris sutil -->
-  <rect x="4" y="4" width="112" height="112" rx="28" fill="#FFFFFF" stroke="url(#pvRainbowMain)" stroke-width="4.5" filter="url(#pvSoftShadow)" />
+  <rect x="4" y="4" width="112" height="112" rx="26" fill="#FFFFFF" stroke="url(#pvRing)" stroke-width="4.5" />
 
-  <!-- Monograma "P" -->
+  <!-- Letra "P" inclinada con remate superior izquierdo fiel al icono original -->
   <path
-    d="M28 88V32H51C62.6 32 70 39.1 70 49.5C70 59.9 62.6 67 51 67H40.5V88H28ZM40.5 56H49.8C55.1 56 57.8 53.3 57.8 49.5C57.8 45.7 55.1 43 49.8 43H40.5V56Z"
-    fill="url(#pvGradP)"
+    d="M20 18H56C72 18 81 26.5 78.8 40.5C76.5 54.8 65.2 63 48.5 63H34.2L30.5 82H16L25.2 26L20 18ZM36.5 50.5H47.8C56.4 50.5 62.2 46.2 63.4 39.2C64.5 32.5 59.8 29.5 51.5 29.5H40.4L36.5 50.5Z"
+    fill="url(#pvOrigP)"
   />
 
-  <!-- Monograma "V" entrelazado con trazo de brocha limpio -->
+  <!-- Letra "V" entrelazada bajo la panza de la P (azul -> verde -> amarillo) -->
   <path
-    d="M55 46L70.5 88H82.5L98 32H85.2L76.5 68.8L66.8 41.5C64.2 44.2 60.1 45.6 55 46Z"
-    fill="url(#pvGradV)"
+    d="M39 59H55.2L65.2 87.5L88.5 43H104.5L68.2 106H56.5L39 59Z"
+    fill="url(#pvOrigV)"
   />
-
-  <!-- Detalle superior de gota/rodillo arcoíris -->
-  <circle cx="91.5" cy="24" r="4" fill="#F43F5E" />
 </svg>
