@@ -111,6 +111,7 @@
       surface: 'Comercial',
       location: 'Valencia y polígonos',
       photo: 'assets/images/servicio-empresas.png',
+      hasText: true,
       summary: 'Pintura profesional para negocios, oficinas y hostelería sin frenar tu actividad.',
       specs: [
         'Ejecución flexible en horario nocturno, festivo o fin de semana.',
@@ -126,6 +127,7 @@
       surface: 'Metal y fachadas',
       location: 'Valencia y alrededores',
       photo: 'assets/images/servicio-pintado-metal.png',
+      hasText: true,
       summary: 'Pintado antioxidante a pistola o rodillo en verjas, puertas, escaleras y ventanas.',
       specs: [
         'Decapado/lijado de óxido e imprimación anticorrosiva.',
@@ -237,13 +239,25 @@
     galleryGrid.innerHTML = visibleProjects
       .map(
         (project, idx) => `
-      <article class="project-card">
+      <article class="project-card${project.hasText ? ' is-graphic' : ''}">
         <div class="project-thumb" data-open-idx="${idx}" tabindex="0" role="button" aria-label="Ampliar ${project.title}">
-          <img src="${project.photo}" alt="${project.title}" class="project-photo" loading="lazy" />
-          <span class="project-category-pill">${project.categoryLabel}</span>
-          <span class="project-surface-pill">${project.surface}</span>
+          <img src="${project.photo}" alt="${project.title}" class="project-photo${project.hasText ? ' is-graphic-img' : ''}" loading="lazy" />
+          ${
+            project.hasText
+              ? ''
+              : `<span class="project-category-pill">${project.categoryLabel}</span>
+                 <span class="project-surface-pill">${project.surface}</span>`
+          }
         </div>
         <div class="project-body">
+          ${
+            project.hasText
+              ? `<div class="project-inline-badges">
+                   <span class="project-inline-badge">${project.categoryLabel}</span>
+                   <span class="project-inline-badge">${project.surface}</span>
+                 </div>`
+              : ''
+          }
           <h3>${project.title}</h3>
           <p>${project.summary}</p>
           <button type="button" class="project-open-btn" data-open-idx="${idx}">
@@ -279,12 +293,51 @@
       document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
     };
 
+    lightboxPrev?.removeAttribute('hidden');
+    lightboxNext?.removeAttribute('hidden');
+    lightboxSpecs?.removeAttribute('hidden');
+    lightboxSummary?.removeAttribute('hidden');
+
     lastFocusedElement = document.activeElement;
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     lightboxClose?.focus();
   }
+
+  // Ampliación completa también para las imágenes con texto de la sección Servicios
+  document.querySelectorAll('.service-media[data-zoom-src]').forEach((mediaEl) => {
+    mediaEl.addEventListener('click', () => {
+      if (!lightbox) return;
+      const src = mediaEl.getAttribute('data-zoom-src');
+      const title = mediaEl.getAttribute('data-zoom-title') || 'Servicio';
+      lightboxVisual.innerHTML = `<img src="${src}" alt="${title}" />`;
+      lightboxCategory.textContent = 'Servicio Oficial';
+      lightboxSurface.textContent = '24/7';
+      lightboxLocation.textContent = 'Valencia';
+      lightboxTitle.textContent = title;
+      lightboxSummary.textContent = '';
+      lightboxSummary?.setAttribute('hidden', '');
+      lightboxSpecs?.setAttribute('hidden', '');
+      lightboxPrev?.setAttribute('hidden', '');
+      lightboxNext?.setAttribute('hidden', '');
+
+      lightboxQuoteBtn.onclick = () => {
+        closeLightbox();
+        const messageField = document.getElementById('contactMessage');
+        if (messageField) {
+          messageField.value = `Hola, solicito información y presupuesto sobre "${title}".`;
+        }
+        document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      lastFocusedElement = document.activeElement;
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lightboxClose?.focus();
+    });
+  });
 
   function closeLightbox() {
     if (!lightbox) return;
